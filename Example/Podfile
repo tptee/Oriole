@@ -1,0 +1,13 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'Oriole_Example', :exclusive => true do
+  pod "Oriole", :path => "../"
+end
+
+target 'Oriole_Tests', :exclusive => true do
+  pod "Oriole", :path => "../"
+
+  pod 'Quick', '~> 0.3.1'
+  pod 'Nimble'
+end
