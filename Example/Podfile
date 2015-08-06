@@ -8,6 +8,6 @@ end
 target 'Oriole_Tests', :exclusive => true do
   pod "Oriole", :path => "../"
 
-  pod 'Quick', '~> 0.3.1'
-  pod 'Nimble'
+  pod 'Quick', '~> 0.5.1'
+  pod 'Nimble', '2.0.0-rc.2'
 end

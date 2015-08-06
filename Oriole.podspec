@@ -17,11 +17,10 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/Oriole"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/tptee/Oriole"
   s.license          = 'MIT'
   s.author           = { "Tyler Thompson" => "tyler@tylerpaulthompson.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/Oriole.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/tptee/Oriole.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.platform     = :ios, '8.0'

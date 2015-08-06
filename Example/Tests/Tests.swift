@@ -4,47 +4,36 @@ import Quick
 import Nimble
 import Oriole
 
-class TableOfContentsSpec: QuickSpec {
+class OrioleSpec: QuickSpec {
     override func spec() {
-        describe("these will fail") {
+		describe("Oriole") {
+			context("CollectionType") {
+				it("safely accesses a collection element by index") {
+					let array = [4, 8, 15, 16, 23, 42]
+					expect(array[safe: 0]) == 4
+					expect(array[safe: 6]).to(beNil())
+				}
 
-            it("can do maths") {
-                expect(1) == 2
-            }
+				it("safely retrieves multiple elements from a collection by index") {
+					let array = [5, 4, 3, 2, 1]
+					expect(array.at([0, 1, 4])) == [5, 4, 1]
+					expect(array.at([1, 5, 90])) == [4]
+				}
 
-            it("can read") {
-                expect("number") == "string"
-            }
+				it("determines if a callback is true for every collection element") {
+					let set = Set(arrayLiteral: "Things", "and", "other", "stuff")
+					expect(set.every { $0.characters.count > 3 }) == true
+					expect(set.every { $0 == "Things" }) == false
+				}
+			}
 
-            it("will eventually fail") {
-                expect("time").toEventually( equal("done") )
-            }
-            
-            context("these will pass") {
-
-                it("can do maths") {
-                    expect(23) == 23
-                }
-
-                it("can read") {
-                    expect("🐮") == "🐮"
-                }
-
-                it("will eventually pass") {
-                    var time = "passing"
-
-                    dispatch_async(dispatch_get_main_queue()) {
-                        time = "done"
-                    }
-
-                    waitUntil { done in
-                        NSThread.sleepForTimeInterval(0.5)
-                        expect(time) == "done"
-
-                        done()
-                    }
-                }
-            }
-        }
+			context("Array") {
+				it("safely divides a collection into multiple collections with a possible remainder") {
+					let array = ["This", "is", "a", "test"]
+					expect(array.chunk(2)) == [["This", "is"], ["a", "test"]]
+					expect(array.chunk(3)) == [["This", "is", "a"], ["test"]]
+				}
+			}
+		}
     }
 }
