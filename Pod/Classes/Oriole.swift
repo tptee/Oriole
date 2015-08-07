@@ -14,9 +14,12 @@ public extension CollectionType where Index: Comparable {
 	}
 
 	public func every(callback: (Generator.Element) -> Bool) -> Bool {
-		return self.reduce(false) { acc, element in
-			return callback(element)
+		for element in self {
+			if !callback(element) {
+				return false
+			}
 		}
+		return true
 	}
 
 	public func find(callback: (Generator.Element) -> Bool) -> Generator.Element? {
@@ -43,7 +46,7 @@ private func chunkArray<T>(s: [T], _ splitSize: Int) -> [[T]] {
 }
 
 public extension Array {
-	public func chunk(length: Int) -> [[T]] {
+	public func chunk(length: Int) -> [[Element]] {
 		return chunkArray(self, length)
 	}
 }
