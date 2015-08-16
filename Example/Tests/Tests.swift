@@ -42,7 +42,7 @@ class OrioleSpec: QuickSpec {
 					let array = [1, 3, 5, 7, 9, 11]
 					expect(Array(array.initial!)) == [1, 3, 5, 7, 9]
 					expect(Array([1].initial!)) == [1]
-					expect([Int]().initial!).to(beNil())
+					expect([Int]().initial).to(beNil())
 				}
 
 				it("retrieves everything but the first element of a collection") {
