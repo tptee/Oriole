@@ -21,9 +21,21 @@ class OrioleSpec: QuickSpec {
 				}
 
 				it("determines if a callback is true for every collection element") {
-					let set = Set(arrayLiteral: "Things", "and", "other", "stuff")
+					let set: Set = ["Things", "and", "other", "stuff"]
 					expect(set.every { $0.characters.count > 2 }) == true
 					expect(set.every { $0 == "Things" }) == false
+				}
+
+				it("determines if a callback is true for at least one collection element") {
+					let array = [9, 7, 5, 3]
+					expect(array.some { $0 > 3 }) == true
+					expect(array.some { $0 > 10 }) == false
+				}
+
+				it("determines if a callback is false for every collection element") {
+					let set: Set = [9.8, 29.4, 1000.3, 234567.89]
+					expect(set.none { $0 < 0 }) == true
+					expect(set.none { $0 < 10000 }) == false
 				}
 
 				it("finds the first element in a collection that returns true in a callback") {

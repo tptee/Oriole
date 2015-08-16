@@ -22,6 +22,19 @@ public extension CollectionType where Index: Comparable {
 		return true
 	}
 
+	public func some(callback: (Generator.Element) -> Bool) -> Bool {
+		for element in self {
+			if callback(element) {
+				return true
+			}
+		}
+		return false
+	}
+
+	public func none(callback: (Generator.Element) -> Bool) -> Bool {
+		return !self.some(callback)
+	}
+
 	public func find(callback: (Generator.Element) -> Bool) -> Generator.Element? {
 		for element in self {
 			if callback(element) {
