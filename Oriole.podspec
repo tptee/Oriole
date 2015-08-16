@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Oriole"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Oriole is a set of protocol extensions that add useful helper methods to Swift collections."
   s.description      = <<-DESC
                       Oriole is a set of protocol extensions that add useful helper methods to Swift collections. Oriole resembles libraries like Dollar and ExSwift (which in turn take inspiration from Lodash), but with some ideological differences:
@@ -23,7 +23,4 @@ Pod::Spec.new do |s|
     'Oriole' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
