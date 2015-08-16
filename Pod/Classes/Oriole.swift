@@ -69,20 +69,14 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 	}
 }
 
-// Helper function for chunk
 // Inspired by http://stackoverflow.com/q/26395766
-private func chunkArray<T>(s: [T], _ splitSize: Int) -> [[T]] {
-	if s.count <= splitSize {
-		return [s]
-	} else {
-		return [Array(s[0..<splitSize])] + chunkArray(
-			Array(s[splitSize..<s.count]), splitSize
-		)
-	}
-}
-
 public extension Array {
-	public func chunk(length: Int) -> [[Element]] {
-		return chunkArray(self, length)
+	public func chunk(splitSize: Int) -> [[Element]] {
+		guard self.count > splitSize else {
+			return [self]
+		}
+
+		return [Array(self[0..<splitSize])] +
+			Array(self[splitSize..<self.count]).chunk(splitSize)
 	}
 }
