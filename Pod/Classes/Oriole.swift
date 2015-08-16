@@ -30,7 +30,43 @@ public extension CollectionType where Index: Comparable {
 		}
 		return nil
 	}
+}
 
+public extension CollectionType where Index.Distance == Int, Index == Int {
+	public var head: Generator.Element? {
+		return first
+	}
+
+	public var initial: SubSequence? {
+		guard count > 0 else {
+			return nil
+		}
+		guard count > 1 else {
+			return self[startIndex...startIndex]
+		}
+
+		return self[startIndex..<endIndex - 1]
+	}
+
+	public var tail: SubSequence? {
+		guard count > 0 else {
+			return nil
+		}
+		guard count > 1 else {
+			return self[startIndex...startIndex]
+		}
+
+		return self[startIndex + 1..<endIndex]
+	}
+
+	public var last: Generator.Element? {
+		return self[safe: endIndex - 1]
+	}
+
+	public func sample() -> Generator.Element {
+		// Use arc4random_uniform() instead of Swift's random()
+		return self[Int(arc4random_uniform(UInt32(count)))]
+	}
 }
 
 // Helper function for chunk
@@ -50,5 +86,3 @@ public extension Array {
 		return chunkArray(self, length)
 	}
 }
-
-// Use Set for set operations.

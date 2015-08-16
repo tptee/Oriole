@@ -22,8 +22,40 @@ class OrioleSpec: QuickSpec {
 
 				it("determines if a callback is true for every collection element") {
 					let set = Set(arrayLiteral: "Things", "and", "other", "stuff")
-					expect(set.every { $0.characters.count > 3 }) == true
+					expect(set.every { $0.characters.count > 2 }) == true
 					expect(set.every { $0 == "Things" }) == false
+				}
+
+				it("finds the first element in a collection that returns true in a callback") {
+					let array = [8, 6, 7, 5, 3, 0, 9]
+					expect(array.find({$0 < 7})) == 6
+				}
+
+				it("retrieves the first element of a collection") {
+					let array = [1, 2]
+					expect(array.head) == 1
+					let surprise: [Int] = []
+					expect(surprise.head).to(beNil())
+				}
+
+				it("retrieves everything but the last element of a collection") {
+					let array = [1, 3, 5, 7, 9, 11]
+					expect(Array(array.initial!)) == [1, 3, 5, 7, 9]
+					expect(Array([1].initial!)) == [1]
+					expect([Int]().initial!).to(beNil())
+				}
+
+				it("retrieves everything but the first element of a collection") {
+					let array = ["some", "mammals", "have", "tails"]
+					expect(Array(array.tail!) == ["mammals", "have", "tails"])
+					expect(Array(["tails"].tail!) == ["tails"])
+					expect([String]().tail).to(beNil())
+				}
+
+				it("retrieves the last element of a collection") {
+					let array = [8, 6, 7, 5, 3, 0, 9]
+					expect(array.last) == 9
+					expect([Int]().last).to(beNil())
 				}
 			}
 
