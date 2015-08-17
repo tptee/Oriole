@@ -18,6 +18,7 @@ class OrioleSpec: QuickSpec {
 					let array = [5, 4, 3, 2, 1]
 					expect(array.at([0, 1, 4])) == [5, 4, 1]
 					expect(array.at([1, 5, 90])) == [4]
+					expect(array.at([90])) == []
 				}
 
 				it("determines if a callback is true for every collection element") {
