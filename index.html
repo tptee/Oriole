@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Oriole  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+  </head>
+  <body>
+    <a title="Oriole  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">Oriole Docs</a> (100% documented)</p>
+        <p class="header-right"><a href=""><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">Oriole Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Oriole  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+          <a href="Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Extensions/Array.html">Array</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Extensions.html#/s:PSs14CollectionType">CollectionType</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Functions.html">Functions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU_ERRL_2atERR">at(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU_ERRL_5everyERR">every(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU_ERRL_4findERR">find(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU_ERRL_4noneERR">none(_:)</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU0_ERRL_6sampleERR">sample()</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Functions.html#/s:FF6OrioleU_ERRL_4someERR">some(_:)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+          <a href="Subscripts.html">Subscripts</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Subscripts.html#/s:sF6OrioleU_ERRL_9subscriptERR">subscript(safe:)</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <a href='#oriole' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h1 id='oriole'>Oriole</h1>
+
+<p><a href="https://travis-ci.org/Tyler%20Thompson/Oriole"><img src="http://img.shields.io/travis/Tyler%20Thompson/Oriole.svg?style=flat" alt="CI Status"></a>
+<a href="http://cocoapods.org/pods/Oriole"><img src="https://img.shields.io/cocoapods/v/Oriole.svg?style=flat" alt="Version"></a>
+<a href="http://cocoapods.org/pods/Oriole"><img src="https://img.shields.io/cocoapods/l/Oriole.svg?style=flat" alt="License"></a>
+<a href="http://cocoapods.org/pods/Oriole"><img src="https://img.shields.io/cocoapods/p/Oriole.svg?style=flat" alt="Platform"></a></p>
+
+<p>Oriole is a set of protocol extensions that add useful helper methods to Swift collections. Oriole resembles libraries like Dollar and ExSwift (which in turn take inspiration from Lodash), but with some ideological differences:</p>
+
+<ul>
+<li>Oriole uses Swift 2.0&rsquo;s new protocol extensions to provide more natural APIs.</li>
+<li>Oriole strives to be as generic as possible. Most methods extend CollectionType. Oriole extends concrete collections like Array, Set, and Dictionary only if necessary.</li>
+<li>Oriole fills in gaps in the Swift standard library. If a method is trivially reproducible by methods in the standard library, it is not included.</li>
+<li>Oriole prefers to implement functional solutions to problems. However, if an imperative solution is elegant and significantly more performant, it will replace the functional solution.</li>
+</ul>
+
+<p>Oriole is in its infancy, but is growing rapidly. I aim to add at least one new tested extension a day until the project is complete. Detailed documentation is forthcoming and will accelerate once <a href="https://github.com/realm/jazzy/pull/261">Jazzy</a> works with Swift 2.0.</p>
+<a href='#usage' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='usage'>Usage</h2>
+
+<p>To run the example project, clone the repo, and run <code>pod install</code> from the Example directory first.</p>
+<a href='#requirements' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='requirements'>Requirements</h2>
+
+<p>This library is Swift 2.0 only due to its reliance on protocol extensions.</p>
+<a href='#installation' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='installation'>Installation</h2>
+
+<p>Oriole is available through <a href="http://cocoapods.org">CocoaPods</a>. To install
+it, simply add the following line to your Podfile:</p>
+<pre class="highlight ruby"><code><span class="n">pod</span> <span class="s2">"Oriole"</span>
+</code></pre>
+<a href='#author' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='author'>Author</h2>
+
+<p>Tyler Thompson, <a href="mailto:tyler@tylerpaulthompson.com">tyler@tylerpaulthompson.com</a></p>
+<a href='#license' class='anchor' aria-hidden=true><span class="header-anchor"></span></a><h2 id='license'>License</h2>
+
+<p>Oriole is available under the MIT license. See the LICENSE file for more info.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2015 <a class="link" href="https://github.com/tptee/Oriole" target="_blank" rel="external">Tyler Thompson</a>. All rights reserved. (Last updated: 2015-08-16)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.2.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
