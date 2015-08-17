@@ -1,7 +1,14 @@
 import Foundation
 
 public extension CollectionType where Index: Comparable {
-	// Credit: https://gist.github.com/brentdax/72f3fcc3274c0e5f12d7
+	/**
+        Safely accesses a collection element by index.
+        Credit: https://gist.github.com/brentdax/72f3fcc3274c0e5f12d7
+
+        :param: safe The index of the element to access.
+
+        :returns: The indexed element or nil if the index is out of bounds.
+	*/
 	public subscript(safe index: Index) -> Generator.Element? {
 		guard startIndex <= index && index < endIndex else {
 			return nil
@@ -9,10 +16,26 @@ public extension CollectionType where Index: Comparable {
 		return self[index]
 	}
 
-	public func at(indices: [Index]) -> [Generator.Element]? {
+	/**
+        Returns elements from a collection with multiple provided indices.
+        If the collection has no elements at any of the provided indices,
+        the returned array will be empty.
+
+        :param: indices The indices of the desired elements
+
+        :returns: An array of extracted elements.
+    */
+	public func at(indices: [Index]) -> [Generator.Element] {
 		return indices.map { index in return self[safe: index] }.flatMap { $0 }
 	}
 
+	/**
+        Determines if a callback is true for every element in a collection.
+
+        :param: callback The callback to check each element against.
+
+        :returns: True or false.
+	*/
 	public func every(callback: (Generator.Element) -> Bool) -> Bool {
 		for element in self {
 			if !callback(element) {
@@ -22,6 +45,13 @@ public extension CollectionType where Index: Comparable {
 		return true
 	}
 
+	/**
+	Determines if a callback is true for at least one element in a collection.
+
+	:param: callback The callback to check each element against.
+
+	:returns: True or false.
+	*/
 	public func some(callback: (Generator.Element) -> Bool) -> Bool {
 		for element in self {
 			if callback(element) {
@@ -31,10 +61,24 @@ public extension CollectionType where Index: Comparable {
 		return false
 	}
 
+	/**
+	Determines if a callback is true for zero elements in a collection.
+
+	:param: callback The callback to check each element against.
+
+	:returns: True or false.
+	*/
 	public func none(callback: (Generator.Element) -> Bool) -> Bool {
 		return !self.some(callback)
 	}
 
+	/**
+	Finds the first element in a collection that is true for a given callback.
+	
+	:param: callback The callback to check each element against.
+
+	:returns: An element or nil if no element satisfied the callback.
+	*/
 	public func find(callback: (Generator.Element) -> Bool) -> Generator.Element? {
 		for element in self {
 			if callback(element) {
@@ -46,10 +90,24 @@ public extension CollectionType where Index: Comparable {
 }
 
 public extension CollectionType where Index.Distance == Int, Index == Int {
+	/**
+	Returns the first element of a collection.
+	
+	:returns: The first element or nil if the collection is empty.
+	*/
 	public var head: Generator.Element? {
 		return first
 	}
 
+	/**
+    Returns all elements of a collection except for the last.
+    
+    Returns nil if the collection is empty.
+    
+    Returns a single-element SubSequence if the collection only has one element.
+
+	:returns: A SubSequence of multiple elements.
+	*/
 	public var initial: SubSequence? {
 		guard count > 0 else {
 			return nil
@@ -61,6 +119,15 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 		return self[startIndex..<endIndex - 1]
 	}
 
+	/**
+	Returns all elements of a collection except for the first.
+
+    Returns nil if the collection is empty.
+
+    Returns a single-element SubSequence if the collection only has one element.
+
+	:returns: A SubSequence of multiple elements.
+	*/
 	public var tail: SubSequence? {
 		guard count > 0 else {
 			return nil
@@ -72,18 +139,43 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 		return self[startIndex + 1..<endIndex]
 	}
 
+	/**
+	Returns the last element of a collection.
+
+	:returns: The last element or nil if the collection is empty.
+	*/
 	public var last: Generator.Element? {
 		return self[safe: endIndex - 1]
 	}
 
-	public func sample() -> Generator.Element {
+	/**
+	Returns a randomly chosen element from a collection.
+
+	:returns: An element or nil if the collection is empty.
+	*/
+	public func sample() -> Generator.Element? {
+		guard self.count > 0 else {
+			return nil
+		}
+
 		// Use arc4random_uniform() instead of Swift's random()
 		return self[Int(arc4random_uniform(UInt32(count)))]
 	}
 }
 
-// Inspired by http://stackoverflow.com/q/26395766
 public extension Array {
+	/**
+	Divide an array into equal-length chunks. The final chunk
+    may contain a remainder. If the chunk length is greater than
+    the length of the original array, it returns the original array
+    unaltered.
+    
+    Inspired by http://stackoverflow.com/q/26395766
+
+	:param: splitSize The length of the chunks.
+
+	:returns: An array of chunked arrays.
+	*/
 	public func chunk(splitSize: Int) -> [[Element]] {
 		guard self.count > splitSize else {
 			return [self]

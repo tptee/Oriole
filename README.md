@@ -14,11 +14,15 @@ Oriole is a set of protocol extensions that add useful helper methods to Swift c
 
 Oriole is in its infancy, but is growing rapidly. I aim to add at least one new tested extension a day until the project is complete. Detailed documentation is forthcoming and will accelerate once [Jazzy](https://github.com/realm/jazzy/pull/261) works with Swift 2.0.
 
+## Documentation
+Read the [docs](https://tptee.github.com/Oriole). Usage examples are forthcoming. The formatting will look a little funky until [Jazzy](https://github.com/realm/jazzy/pull/261) officially supports Swift 2.0.
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Requirements
+
 This library is Swift 2.0 only due to its reliance on protocol extensions.
 
 ## Installation
