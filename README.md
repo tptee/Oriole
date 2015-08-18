@@ -12,7 +12,7 @@ Oriole is a set of protocol extensions that add useful helper methods to Swift c
 - Oriole fills in gaps in the Swift standard library. If a method is trivially reproducible by methods in the standard library, it is not included.
 - Oriole prefers to implement functional solutions to problems. However, if an imperative solution is elegant and significantly more performant, it will replace the functional solution.
 
-Oriole is in its infancy, but is growing rapidly. I aim to add at least one new tested extension a day until the project is complete. Detailed documentation is forthcoming and will accelerate once [Jazzy](https://github.com/realm/jazzy/pull/261) works with Swift 2.0.
+Oriole is in its infancy, but is growing rapidly. I aim to add at least one new tested extension a day until the project is complete.
 
 ## Documentation
 Read the [docs](https://tptee.github.com/Oriole). Usage examples are forthcoming. The formatting will look a little funky until [Jazzy](https://github.com/realm/jazzy/pull/261) officially supports Swift 2.0.
