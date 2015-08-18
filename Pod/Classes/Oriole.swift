@@ -46,11 +46,11 @@ public extension CollectionType where Index: Comparable {
 	}
 
 	/**
-	Determines if a callback is true for at least one element in a collection.
+        Determines if a callback is true for at least one element in a collection.
 
-	:param: callback The callback to check each element against.
+        :param: callback The callback to check each element against.
 
-	:returns: True or false.
+        :returns: True or false.
 	*/
 	public func some(callback: (Generator.Element) -> Bool) -> Bool {
 		for element in self {
@@ -62,22 +62,22 @@ public extension CollectionType where Index: Comparable {
 	}
 
 	/**
-	Determines if a callback is true for zero elements in a collection.
+        Determines if a callback is true for zero elements in a collection.
 
-	:param: callback The callback to check each element against.
+        :param: callback The callback to check each element against.
 
-	:returns: True or false.
+        :returns: True or false.
 	*/
 	public func none(callback: (Generator.Element) -> Bool) -> Bool {
 		return !self.some(callback)
 	}
 
 	/**
-	Finds the first element in a collection that is true for a given callback.
-	
-	:param: callback The callback to check each element against.
+        Finds the first element in a collection that is true for a given callback.
+        
+        :param: callback The callback to check each element against.
 
-	:returns: An element or nil if no element satisfied the callback.
+        :returns: An element or nil if no element satisfied the callback.
 	*/
 	public func find(callback: (Generator.Element) -> Bool) -> Generator.Element? {
 		for element in self {
@@ -91,22 +91,22 @@ public extension CollectionType where Index: Comparable {
 
 public extension CollectionType where Index.Distance == Int, Index == Int {
 	/**
-	Returns the first element of a collection.
-	
-	:returns: The first element or nil if the collection is empty.
+        Returns the first element of a collection.
+        
+        :returns: The first element or nil if the collection is empty.
 	*/
 	public var head: Generator.Element? {
 		return first
 	}
 
 	/**
-    Returns all elements of a collection except for the last.
-    
-    Returns nil if the collection is empty.
-    
-    Returns a single-element SubSequence if the collection only has one element.
+        Returns all elements of a collection except for the last.
+        
+        Returns nil if the collection is empty.
+        
+        Returns a single-element SubSequence if the collection only has one element.
 
-	:returns: A SubSequence of multiple elements.
+        :returns: A SubSequence of multiple elements.
 	*/
 	public var initial: SubSequence? {
 		guard count > 0 else {
@@ -120,13 +120,13 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 	}
 
 	/**
-	Returns all elements of a collection except for the first.
+        Returns all elements of a collection except for the first.
 
-    Returns nil if the collection is empty.
+        Returns nil if the collection is empty.
 
-    Returns a single-element SubSequence if the collection only has one element.
+        Returns a single-element SubSequence if the collection only has one element.
 
-	:returns: A SubSequence of multiple elements.
+        :returns: A SubSequence of multiple elements.
 	*/
 	public var tail: SubSequence? {
 		guard count > 0 else {
@@ -140,18 +140,18 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 	}
 
 	/**
-	Returns the last element of a collection.
+        Returns the last element of a collection.
 
-	:returns: The last element or nil if the collection is empty.
+        :returns: The last element or nil if the collection is empty.
 	*/
 	public var last: Generator.Element? {
 		return self[safe: endIndex - 1]
 	}
 
 	/**
-	Returns a randomly chosen element from a collection.
+        Returns a randomly chosen element from a collection.
 
-	:returns: An element or nil if the collection is empty.
+        :returns: An element or nil if the collection is empty.
 	*/
 	public func sample() -> Generator.Element? {
 		guard self.count > 0 else {
@@ -165,16 +165,16 @@ public extension CollectionType where Index.Distance == Int, Index == Int {
 
 public extension Array {
 	/**
-	Divide an array into equal-length chunks. The final chunk
-    may contain a remainder. If the chunk length is greater than
-    the length of the original array, it returns the original array
-    unaltered.
-    
-    Inspired by http://stackoverflow.com/q/26395766
+        Divide an array into equal-length chunks. The final chunk
+        may contain a remainder. If the chunk length is greater than
+        the length of the original array, it returns the original array
+        unaltered.
+        
+        Inspired by http://stackoverflow.com/q/26395766
 
-	:param: splitSize The length of the chunks.
+        :param: splitSize The length of the chunks.
 
-	:returns: An array of chunked arrays.
+        :returns: An array of chunked arrays.
 	*/
 	public func chunk(splitSize: Int) -> [[Element]] {
 		guard self.count > splitSize else {
@@ -184,4 +184,22 @@ public extension Array {
 		return [Array(self[0..<splitSize])] +
 			Array(self[splitSize..<self.count]).chunk(splitSize)
 	}
+}
+
+public extension Dictionary {
+    /**
+        Given a dictionary, return a new dictionary with its values transformed by a closure.
+        
+        :param: transform A closure that transforms a value into another value.
+    
+        :returns: A dictionary with identical keys and transformed values.
+    */
+    public func mapValues(transform: (Value) -> (Value)) -> [Key: Value] {
+        return self.reduce([Key: Value]()) { acc, pairs in
+            let (key, value) = pairs
+            var result = acc
+            result.updateValue(transform(value), forKey: key)
+            return result
+        }
+    }
 }

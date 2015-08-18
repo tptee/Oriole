@@ -79,6 +79,21 @@ class OrioleSpec: QuickSpec {
 					expect(array.chunk(3)) == [["This", "is", "a"], ["test"]]
 				}
 			}
+
+            context("Dictionary") {
+                it("returns a new dictionary with its values transformed by a closure") {
+                    let dict = [
+                        "Test": 1,
+                        "ing": 2
+                    ]
+                    expect(dict.mapValues {
+                        $0 * 2
+                    }) == [
+                        "Test": 2,
+                        "ing": 4
+                    ]
+                }
+            }
 		}
     }
 }
