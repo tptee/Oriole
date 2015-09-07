@@ -86,11 +86,53 @@ class OrioleSpec: QuickSpec {
                         "Test": 1,
                         "ing": 2
                     ]
-                    expect(dict.mapValues {
-                        $0 * 2
-                    }) == [
+                    expect(dict.mapValues { $0 * 2 }) == [
                         "Test": 2,
                         "ing": 4
+                    ]
+                    let anotherDict = [
+                        "Doot": "doot",
+                        "Mr.": "Skeltal"
+                    ]
+                    expect(anotherDict.mapValues { $0 + " doot!"} ) == [
+                        "Doot": "doot doot!",
+                        "Mr.": "Skeltal doot!"
+                    ]
+                }
+
+                it("merges two dictionaries") {
+                    let original = ["This": "is a test"]
+                    let new = [
+                        "No need": "for alarm",
+                        "This": "is not a drill"
+                    ]
+                    expect(original.merge(new)) == [
+                        "This": "is not a drill",
+                        "No need": "for alarm"
+                    ]
+                }
+
+                it("returns a new dictionary where each pair's key is in a whitelist") {
+                    let dict = [
+                        "I want": "this",
+                        "I also want": "this",
+                        "I don't want": "this"
+                    ]
+                    expect(dict.pluck(["I want", "I also want"])) == [
+                        "I want": "this",
+                        "I also want": "this"
+                    ]
+                }
+
+                it("returns a new dictionary where each pair's key isn't in a blacklist") {
+                    let dict = [
+                        "I want": "this",
+                        "I also want": "this",
+                        "I don't want": "this"
+                    ]
+                    expect(dict.omit(["I don't want"])) == [
+                        "I want": "this",
+                        "I also want": "this"
                     ]
                 }
             }

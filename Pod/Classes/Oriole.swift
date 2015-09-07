@@ -202,4 +202,57 @@ public extension Dictionary {
             return result
         }
     }
+
+    /**
+        Merges another dictionary with the original dictionary. Right takes precedence.
+    
+        :param: dict A dictionary to merge into this one.
+    
+        :returns: A merged dictionary.
+    */
+    public func merge(dict: Dictionary) -> Dictionary {
+        var original = self
+        for (key, value) in dict {
+            original.updateValue(value, forKey: key)
+        }
+        return original
+    }
+
+    /*
+        Returns a dictionary containing pairs whose keys are in a whitelist.
+    
+        :param: whitelist An array of keys used to whitelist pairs.
+    
+        :returns: A dictionary with the whitelisted pairs.
+    **/
+    public func pluck(whitelist: [Key]) -> Dictionary {
+        let pairs = self.filter { pairs in
+            let (key, _) = pairs
+            return whitelist.contains(key)
+        }
+        var plucked = [Key: Value]()
+        for (key, value) in pairs {
+            plucked.updateValue(value, forKey: key)
+        }
+        return plucked
+    }
+
+    /*
+    Returns a dictionary containing pairs whose keys aren't in a blacklist.
+
+    :param: whitelist An array of keys used to blacklist pairs.
+
+    :returns: A dictionary without the whitelisted pairs.
+    **/
+    public func omit(blacklist: [Key]) -> Dictionary {
+        let pairs = self.filter { pairs in
+            let (key, _) = pairs
+            return !blacklist.contains(key)
+        }
+        var filtered = [Key: Value]()
+        for (key, value) in pairs {
+            filtered.updateValue(value, forKey: key)
+        }
+        return filtered
+    }
 }
